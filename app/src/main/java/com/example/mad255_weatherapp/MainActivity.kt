@@ -1,29 +1,13 @@
 package com.example.mad255_weatherapp
-
-import android.content.Context
-import android.content.pm.PackageManager
-import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.mad255_weatherapp.databinding.ActivityMainBinding
 import com.example.mad255_weatherapp.models.LocationData
 import com.example.mad255_weatherapp.models.WeatherData
 import com.example.mad255_weatherapp.viewModels.MainActivityViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.json.JSONObject
-import java.net.URL
-import java.nio.charset.Charset
 
 //Code by Jacob Miller 2023 - MAD255 - ANDROID 3
 /*APIs used
@@ -40,31 +24,28 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var binding: ActivityMainBinding
 
-    private fun updateWeatherUI(weatherData: WeatherData?){
+    private fun updateWeatherUI(weatherData: WeatherData){
         Log.i("view_debug", "appView: updating weather UI")
-        if (weatherData != null) {
-            binding.tvTemp.text = "${weatherData.temp}°"
-            binding.tvFeelsLike.text = "${weatherData.feelsLike}°"
-            binding.tvmaxTemp.text = "max/min: ${weatherData.maxTemp}°" +
-                    " - ${weatherData?.minTemp}°"
-            binding.tvHumidity.text = "humidity:${weatherData.humidity}%"
-            binding.tvConditions.text = "pressure: ${weatherData.pressure}"
-        } else {
-            Toast.makeText(this, "Error occured getting weather data.", Toast.LENGTH_SHORT).show()
-        }
+        val stringTemp = getString(R.string.string_temp)
+        val stringFeelsLike = getString(R.string.string_feels_like)
+        val stringMaxMin = getString(R.string.string_max_min)
+        val stringHumidity = getString(R.string.string_humidity)
+        val stringPressure = getString(R.string.string_pressure)
+
+        binding.tvTemp.text = String.format(stringTemp, weatherData.temp)
+        binding.tvFeelsLike.text = String.format(stringFeelsLike, weatherData.feelsLike)
+        binding.tvmaxTemp.text = String.format(stringMaxMin, weatherData.minTemp, weatherData.maxTemp)
+        binding.tvHumidity.text = String.format(stringHumidity, weatherData.humidity)
+        binding.tvPressure.text = String.format(stringPressure, weatherData.pressure)
     }
 
-    private fun updateLocationUI(locationData: LocationData?){
+    private fun updateLocationUI(locationData: LocationData){
         Log.i("view_debug", "appView: updating location UI")
-        if (locationData != null) {
-            val strgCity = locationData.city
-            val strgState = locationData.state
-            var strgLabel = "Unknown, Unknown"
-
-            if (strgCity != null && strgState != null) {
-                strgLabel = "${strgCity}, $strgState"
-            }
-            binding.tvlocation.text = strgLabel
+        if (locationData.longitude != null && locationData.latitude != null) {
+            val stringLocation = getString(R.string.string_location)
+            binding.tvlocation.text = String.format(stringLocation, locationData.city, locationData.state)
+        } else {
+            Toast.makeText(this, "Error occurred while retrieving weather", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -77,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         //configure the viewModel
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
 
-        //updtes the UI when Weather api updates live data
+        //update the UI when Weather api updates live data
         viewModel.weatherLiveData.observe(this) { weatherData ->
             updateWeatherUI(weatherData)
         }
@@ -88,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //get weather on start up
-        viewModel.getWeather()
+        viewModel.getWeatherByLocation("52240")
         //listener for the button
         binding.btnRefresh.setOnClickListener {
             if (binding.etZipCode.text.isNotEmpty()) {
