@@ -5,7 +5,7 @@ import java.net.URL
 class WeatherApi {
     private lateinit var response: String
     //api key stuff: this should be kept secret.
-    private val apiKeyWeather = "1db914c623ec2e5caba5ddfe8e12b0de"
+    private val apiKeyWeather = ""
 
     fun callWeatherAPI(lat: String, lon: String): String? {
         Log.i("API_debug", "app: calling weatherApi from class.")
