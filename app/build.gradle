@@ -15,9 +15,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "WEATHER_API_KEY", "\"${project.WEATHER_API_KEY}\""
+        buildConfigField "String", "LOCATION_API_KEY", "\"${project.LOCATION_API_KEY}\""
     }
     buildFeatures{
         viewBinding true
+        buildConfig true
     }
 
     buildTypes {

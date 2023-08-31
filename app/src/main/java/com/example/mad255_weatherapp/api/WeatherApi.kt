@@ -1,5 +1,6 @@
 package com.example.mad255_weatherapp.api
 import android.util.Log
+import com.example.mad255_weatherapp.BuildConfig
 import java.net.URL
 
 
@@ -10,7 +11,7 @@ import java.net.URL
 class WeatherApi {
     private lateinit var response: String
     //api key stuff: this should be kept secret.
-    private val apiKeyWeather = ""
+    private val apiKeyWeather = BuildConfig.WEATHER_API_KEY
 
     fun callWeatherAPI(lat: String, lon: String): String? {
         Log.i("API_debug", "app: calling weatherApi from class.")
