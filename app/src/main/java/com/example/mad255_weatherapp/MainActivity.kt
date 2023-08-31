@@ -15,15 +15,22 @@ import com.example.mad255_weatherapp.viewModels.MainActivityViewModel
 * ZipCodeBase - Zipcode API
 * */
 
-/*internet use permissions are applied in the manifest.
+/*Note: internet use permissions are applied in the manifest.*/
 
+
+/*VIEW:
+* this handles updating the UI for the app and it also
+* notifies the user if it thinks they have entered an invalid
+* zip code.
 * */
-
 class MainActivity : AppCompatActivity() {
     //setup var for binding(synthetic replacement)
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var binding: ActivityMainBinding
 
+    /*function update UI:
+    * recieves a WeatherData Object/class as parameter - containing data received from the
+    * weather api and updates the user interface with this data.*/
     private fun updateWeatherUI(weatherData: WeatherData){
         Log.i("view_debug", "appView: updating weather UI")
         val stringTemp = getString(R.string.string_temp)
@@ -34,18 +41,22 @@ class MainActivity : AppCompatActivity() {
 
         binding.tvTemp.text = String.format(stringTemp, weatherData.temp)
         binding.tvFeelsLike.text = String.format(stringFeelsLike, weatherData.feelsLike)
-        binding.tvmaxTemp.text = String.format(stringMaxMin, weatherData.minTemp, weatherData.maxTemp)
+        binding.tvMaxTemp.text = String.format(stringMaxMin, weatherData.minTemp, weatherData.maxTemp)
         binding.tvHumidity.text = String.format(stringHumidity, weatherData.humidity)
         binding.tvPressure.text = String.format(stringPressure, weatherData.pressure)
     }
 
+    /*function updateLocationUI
+    * Receives locationData object/class that contains data received by the
+    * location api then updates the user UI with that data.
+     */
     private fun updateLocationUI(locationData: LocationData){
         Log.i("view_debug", "appView: updating location UI")
         if (locationData.longitude != null && locationData.latitude != null) {
             val stringLocation = getString(R.string.string_location)
-            binding.tvlocation.text = String.format(stringLocation, locationData.city, locationData.state)
+            binding.tvLocation.text = String.format(stringLocation, locationData.city, locationData.state)
         } else {
-            Toast.makeText(this, "Error occurred while retrieving weather", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please ensure zip code is correct.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -58,22 +69,23 @@ class MainActivity : AppCompatActivity() {
         //configure the viewModel
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
 
-        //update the UI when Weather api updates live data
+        //observe live data: calls update function when data changes.
         viewModel.weatherLiveData.observe(this) { weatherData ->
             updateWeatherUI(weatherData)
         }
-
-        //update the UI when location api updates live data
         viewModel.locationLiveData.observe(this) { locationData ->
             updateLocationUI(locationData)
         }
 
-        //get weather on start up
+        //get weather on start up using a default zip code
         viewModel.getWeatherByLocation("52240")
+
         //listener for the button
         binding.btnRefresh.setOnClickListener {
             if (binding.etZipCode.text.isNotEmpty()) {
                 viewModel.getWeatherByLocation(binding.etZipCode.text.toString())
+            } else {
+                Toast.makeText(this, "Please enter a zip code.", Toast.LENGTH_SHORT).show()
             }
         }
     }

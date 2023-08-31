@@ -2,6 +2,11 @@ package com.example.mad255_weatherapp.api
 import android.util.Log
 import java.net.URL
 
+
+/*LOCATION API
+* Api class that makes api calls
+* * Returns: JsonObject or null if api call fails.
+* */
 class WeatherApi {
     private lateinit var response: String
     //api key stuff: this should be kept secret.

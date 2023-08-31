@@ -1,141 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/etZipCode"
-        android:layout_width="0dp"
+        android:layout_width="350dp"
         android:layout_height="50dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginBottom="95dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="0dp"
         android:ems="10"
         android:hint="@string/string_zip_enter"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/tvTemp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:autofillHints="" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"/>
 
     <TextView
         android:id="@+id/tvTemp"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
         android:gravity="center"
         android:text="@string/string_placeholder"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toTopOf="@+id/labelFeels"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etZipCode" />
+        android:textSize="45sp" />
 
     <TextView
         android:id="@+id/tvFeelsLike"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="83dp"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
         android:gravity="center"
         android:text="@string/string_placeholder"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvlocation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelFeels" />
+        android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/tvmaxTemp"
-        android:layout_width="0dp"
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="33dp"
-        android:gravity="start"
+        android:orientation="vertical"
+        android:layout_gravity="start"
         android:paddingStart="50dp"
-        android:paddingEnd="50dp"
-        android:text="@string/string_placeholder"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvlocation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:paddingEnd="50dp">
 
-    <TextView
-        android:id="@+id/labelFeels"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:text="@string/string_placeholder"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvFeelsLike"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTemp" />
+        <!-- location metric -->
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/string_placeholder"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tvMaxTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/string_placeholder"
+            android:textSize="20sp"
+            android:layout_marginVertical="10dp"/>
+
+        <!-- Horizontal: Extra metrics -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start">
+            <TextView
+                android:id="@+id/tvHumidity"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="start"
+                android:text="@string/string_placeholder"
+                android:textSize="20sp"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:id="@+id/tvPressure"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="start"
+                android:text="@string/string_placeholder"
+                android:textSize="20sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="0dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"/>
 
     <Button
         android:id="@+id/btnRefresh"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="74dp"
+        android:layout_marginBottom="50dp"
         android:background="@color/black"
-        android:text="@string/string_button_refresh"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPressure" />
+        android:text="@string/string_button_refresh" />
 
-    <TextView
-        android:id="@+id/tvlocation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="33dp"
-        android:gravity="start"
-        android:paddingStart="50dp"
-        android:paddingEnd="50dp"
-        android:text="@string/string_placeholder"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvPressure"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFeelsLike" />
-
-    <TextView
-        android:id="@+id/tvHumidity"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        android:paddingStart="50dp"
-        android:paddingEnd="50dp"
-        android:text="@string/string_placeholder"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvlocation" />
-
-    <TextView
-        android:id="@+id/tvPressure"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="23dp"
-        android:gravity="start"
-        android:paddingStart="50dp"
-        android:paddingEnd="50dp"
-        android:text="@string/string_placeholder"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnRefresh"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvlocation" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

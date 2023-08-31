@@ -14,11 +14,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
+/*ViewModel:
+* Live Data is initialized here
+* Repositories are called from here
+* */
 class MainActivityViewModel: ViewModel() {
-
     private val weatherApi = WeatherApi()
     private val locationApi = LocationApi()
-
     private val weatherRepository = WeatherRepository(weatherApi)
     private val locationRepository = LocationRepository(locationApi)
 
@@ -30,22 +32,28 @@ class MainActivityViewModel: ViewModel() {
     val locationLiveData: LiveData<LocationData>
         get() = _locationLiveData
 
+
     /*GetWeatherByLocation():
+    * Coroutines are handled in here:
+    function first calls the LocationRepository; location info is received here.
+
+    * Location Live Data will always be updated even if null is returned.
+    * View checks for null so that it can notify the user.
+
+    * Weather Live Data is only updated if the function/api succeeds.
     * */
     fun getWeatherByLocation(zipCode: String){
         CoroutineScope(IO).launch {
             val locationResponse = locationRepository.getLocationData(zipCode)
             _locationLiveData.postValue(locationResponse)
 
-            if (locationResponse.latitude != null && locationResponse.longitude != null) {
-                val weatherResponse = weatherRepository.getWeatherData(
-                    locationResponse.latitude,
-                    locationResponse.longitude)
+            val weatherResponse = weatherRepository.getWeatherData(
+                locationResponse.latitude,
+                locationResponse.longitude)
 
-                //only update the live data if the api call was successful.
-                if (weatherResponse != null) {
-                    _weatherLiveData.postValue(weatherResponse)
-                }
+            //only update the live data if the api call was successful.
+            if (weatherResponse != null) {
+                _weatherLiveData.postValue(weatherResponse)
             }
         }
         Log.i("_debug", "ViewModel: received on location call $locationLiveData")
