@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">MAD255-WeatherApp</string>
+    <string name="app_name">Weather App</string>
 
 <!-- Weather UI strings -->
-    <string name="string_temp">%s°</string>
-    <string name="string_feels_like">feels like %s°</string>
-    <string name="string_max_min">max/min: %s° to %s°</string>
+    <string name="string_temp">%s°%s</string>
+    <string name="string_feels_like">feels like: %s°%s</string>
+    <string name="string_max_min">min/max: %s°%s to %s°%s</string>
     <string name="string_humidity">humidity: %s %%</string>
     <string name="string_pressure">pressure: %s</string>
 
@@ -12,8 +12,12 @@
     <string name="string_location"> %s, %s</string>
 
 <!-- UI strings -->
-    <string name="string_button_refresh">Refresh</string>
+    <string name="string_button_refresh">Find Weather</string>
     <string name="string_placeholder">-</string>
     <string name="string_zip_enter">Enter Zip Code</string>
+
+<!-- Temperature -->
+    <string name="string_f">°F</string>
+    <string name="string_c">°C</string>
 
 </resources>

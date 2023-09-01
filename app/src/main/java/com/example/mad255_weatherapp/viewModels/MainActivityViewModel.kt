@@ -19,8 +19,10 @@ import kotlinx.coroutines.launch
 * Repositories are called from here
 * */
 class MainActivityViewModel: ViewModel() {
+    //init api:
     private val weatherApi = WeatherApi()
     private val locationApi = LocationApi()
+    //init live data:
     private val weatherRepository = WeatherRepository(weatherApi)
     private val locationRepository = LocationRepository(locationApi)
 
@@ -31,6 +33,27 @@ class MainActivityViewModel: ViewModel() {
     private val _locationLiveData = MutableLiveData<LocationData>()
     val locationLiveData: LiveData<LocationData>
         get() = _locationLiveData
+
+    /* selected temperature format:
+    0 = Fahrenheit, 1 = Celsius
+     */
+    var selectedFormat = 0
+    var lastResponse: WeatherData? = null
+    /*updateFormat():
+    * handles converting the format of the temperature when the user
+    * changes it via UI spinner.
+    * */
+    fun updateFormat(){
+        if (lastResponse != null){
+            if (selectedFormat == 0) {
+                lastResponse!!.convert(false)
+            } else {
+                lastResponse!!.convert(true)
+            }
+            Log.i("viewModel_debug", "posted live data for weatherData")
+            _weatherLiveData.postValue(lastResponse)
+        }
+    }
 
 
     /*GetWeatherByLocation():
@@ -53,6 +76,11 @@ class MainActivityViewModel: ViewModel() {
 
             //only update the live data if the api call was successful.
             if (weatherResponse != null) {
+                if (selectedFormat == 1){
+                    weatherResponse.convert(true)
+                    Log.i("viewModel_debug", "converting weatherData to celsius.")
+                }
+                lastResponse = weatherResponse
                 _weatherLiveData.postValue(weatherResponse)
             }
         }

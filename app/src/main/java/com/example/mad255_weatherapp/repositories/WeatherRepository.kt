@@ -17,6 +17,7 @@ class WeatherRepository(private val weatherApi: WeatherApi) {
         val jsonObj = JSONObject(json)
         val main = jsonObj.getJSONObject("main")
         return WeatherData(
+            false,
             main.getString("temp"),
             main.getString("feels_like"),
             main.getString("temp_max"),
@@ -27,7 +28,7 @@ class WeatherRepository(private val weatherApi: WeatherApi) {
     fun getWeatherData(lat: String?, lon:String?): WeatherData? {
         if (lat != null && lon != null) {
             val apiResponseJson = weatherApi.callWeatherAPI(lat, lon)
-            var weatherData = WeatherData("", "", "", "", "", "")
+            var weatherData = WeatherData(false, "", "", "", "", "", "")
             if (apiResponseJson != null) {
                 try {
                     weatherData = parseWeatherData(apiResponseJson)
