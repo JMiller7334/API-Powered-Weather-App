@@ -6,7 +6,7 @@ they want to recieve the weather in Fahrenheit or Celsius.
 
   + This project takes advantage of two separate RESTful APIs
 
-## Github Links:
+## Github Code Links(This Project):
 Below are some Github links leading directly to the code in this repository.
 + [View](https://github.com/JMiller7334/API-Powered-WeatherApp/blob/master/app/src/main/java/com/example/mad255_weatherapp/MainActivity.kt)
 + [ViewModel](https://github.com/JMiller7334/API-Powered-WeatherApp/blob/master/app/src/main/java/com/example/mad255_weatherapp/viewModels/MainActivityViewModel.kt)
