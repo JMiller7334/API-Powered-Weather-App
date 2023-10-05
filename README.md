@@ -23,7 +23,7 @@ Below are some Github links leading directly to the code in this repository.
   + OpenWeatherMap: [https://openweathermap.org/api](https://openweathermap.org/api)
 
 ## Project Goals:
-+ Learn practical usage of RESTful APIs.
++ Learn practical usage of REST APIs.
 + Improve on creating user interfaces.
 + Gain better understanding of how to use MVVM and APIs together.
 + Practice handling JSON Objects.
