@@ -4,7 +4,7 @@ An Android weather app written in Kotlin that allows the user to get the weather
 location depending on the zip code that the user enters. The user may also select if 
 they want to recieve the weather in Fahrenheit or Celsius.
 
-  + This project takes advantage of two separate RESTful APIs
+  + This project takes advantage of two separate REST APIs
 
 ## Github Code Links(This Project):
 Below are some Github links leading directly to the code in this repository.
