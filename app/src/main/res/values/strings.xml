@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Weather App</string>
+    <string name="app_name">API Weather App</string>
 
 <!-- Weather UI strings -->
     <string name="string_temp">%s°%s</string>

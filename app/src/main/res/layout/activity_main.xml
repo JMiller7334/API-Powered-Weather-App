@@ -10,6 +10,8 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -19,7 +21,7 @@
             android:id="@+id/etZipCode"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="24dp"
             android:layout_marginStart="7dp"
             android:layout_marginEnd="7dp"
             android:ems="10"
@@ -34,7 +36,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/spinner_border"
-            android:layout_margin="5dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="20dp"
             android:layout_weight="1">
 
             <Spinner
@@ -141,14 +144,24 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"/>
-
-    <Button
-        android:id="@+id/btnRefresh"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:background="@color/black"
-        android:textSize="15sp"
-        android:text="@string/string_button_refresh" />
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_find_weather">
+        <Button
+            android:id="@+id/btnRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="85dp"
+            android:background="#00FFA500"
+            android:textColor="#00BCD4"
+
+            android:textSize="25sp"
+            android:paddingHorizontal="55sp"
+            android:text="@string/string_button_refresh"/>
+
+
+    </LinearLayout>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
