@@ -10,8 +10,12 @@ import java.net.URL
 * * Returns: JsonObject or null if api call fails.
 * */
 class LocationApi {
+
+    private val API_SERVICE_KEY ="1622e930-ac9d-11ed-a940-ffdae417e345";
+
     private lateinit var response: String
-    private val apiKeyLocation = BuildConfig.LOCATION_API_KEY
+    private val apiKeyLocation = API_SERVICE_KEY //BuildConfig.LOCATION_API_KEY
+
     fun callLocationAPI(zipCode: String): String? {
         Log.i("locationApi_debug", "api-location: getting location...")
         val apiUrl = "https://app.zipcodebase.com/api/v1/search?apikey=${apiKeyLocation}&codes=${zipCode}&country=us"

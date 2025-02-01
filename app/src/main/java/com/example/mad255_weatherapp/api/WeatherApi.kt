@@ -9,9 +9,11 @@ import java.net.URL
 * * Returns: JsonObject or null if api call fails.
 * */
 class WeatherApi {
+    private val API_SERVICE_KEY = "1db914c623ec2e5caba5ddfe8e12b0de"
+
     private lateinit var response: String
     //api key stuff: this should be kept secret.
-    private val apiKeyWeather = BuildConfig.WEATHER_API_KEY
+    private val apiKeyWeather = API_SERVICE_KEY//BuildConfig.WEATHER_API_KEY
 
     fun callWeatherAPI(lat: String, lon: String): String? {
         Log.i("API_debug", "app: calling weatherApi from class.")
